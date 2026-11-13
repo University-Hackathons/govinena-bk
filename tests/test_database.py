@@ -70,7 +70,9 @@ def test_migrations_upgrade_downgrade_and_check(tmp_path, monkeypatch):
     engine = build_engine(Settings(_env_file=None, database_url=url))
     assert inspect(engine).get_table_names() == [
         "alembic_version",
+        "crops",
         "farmer_profiles",
+        "markets",
         "revoked_sessions",
         "users",
     ]

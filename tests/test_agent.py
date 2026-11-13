@@ -19,13 +19,18 @@ def authenticated_demo(application):
     )
 
 
-def test_markets_endpoint(client):
+def test_markets_endpoint(client, application):
+    from app.db.seed_catalog import seed_catalog
+    from app.models import Base
+
+    Base.metadata.create_all(application.state.engine)
+    with application.state.session_factory() as session:
+        seed_catalog(session)
     response = client.get("/api/v1/markets")
     assert response.status_code == 200
     body = response.json()
-    assert body["data_source"] == "synthetic"
-    assert len(body["markets"]) == 2
-    assert all(market["data_source"] == "synthetic" for market in body["markets"])
+    assert body["total"] == 3
+    assert all("price_per_kg" not in market for market in body["items"])
 
 
 def test_agent_endpoint_without_key(client, monkeypatch):
