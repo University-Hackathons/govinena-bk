@@ -36,6 +36,15 @@ class Settings(BaseSettings):
     reasoning_mode: Literal["mock", "openai"] = "mock"
     cors_origins: list[HttpUrl] = Field(default_factory=lambda: [HttpUrl("http://localhost:3000")])
 
+    supabase_url: HttpUrl | None = None
+    supabase_publishable_key: SecretStr | None = Field(default=None, repr=False)
+    supabase_audience: str = "authenticated"
+
+    @field_validator("supabase_url", "supabase_publishable_key", mode="before")
+    @classmethod
+    def empty_auth_setting(cls, value):
+        return None if isinstance(value, str) and not value.strip() else value
+
     @model_validator(mode="after")
     def validate_database(self) -> "Settings":
         try:

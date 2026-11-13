@@ -29,6 +29,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         description="GoviNena farmer market decision support backend.",
         lifespan=lifespan,
         responses={
+            401: {"model": ErrorResponse},
+            403: {"model": ErrorResponse},
+            503: {"model": ErrorResponse},
             404: {"model": ErrorResponse},
             422: {"model": ErrorResponse},
             500: {"model": ErrorResponse},

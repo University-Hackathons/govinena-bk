@@ -1,13 +1,22 @@
 from decimal import Decimal
+from uuid import UUID
 
 import pytest
 
 from app.agents.demo import run_demo
 from app.agents.provider import MockReasoner, ProviderConfigurationError, create_reasoner
+from app.core.auth import Identity, active_identity
 from app.core.config import Settings
 from app.schemas.agent import AgentDemoRequest, TransportEstimate
 from app.schemas.market import MarketPrice
 from app.services.profitability import ProfitabilityCalculator
+
+
+@pytest.fixture(autouse=True)
+def authenticated_demo(application):
+    application.dependency_overrides[active_identity] = lambda: Identity(
+        UUID(int=1), UUID(int=2), "demo@example.test"
+    )
 
 
 def test_markets_endpoint(client):
