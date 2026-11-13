@@ -1,9 +1,11 @@
 # GoviNena backend
 
+Feature 03 adds the read-only crop and wholesale market catalog. See [CATALOG.md](CATALOG.md) for setup, source provenance, API contracts, and validation.
+
 Feature 02 adds farmer profiles and preferences. See [FARMER_PROFILE.md](FARMER_PROFILE.md) for API contracts, migration steps, file changes, verification, and current environment limitations.
 
 Python 3.12 FastAPI foundation for the GoviNena farmer market decision support system.
-The current APIs demonstrate synthetic data and deterministic reasoning, not live market advice.
+The catalog APIs serve sourced reference data. The separate agent demo uses synthetic data and deterministic reasoning, not live market advice.
 
 See [AUTHENTICATION.md](AUTHENTICATION.md) for Supabase configuration, session revocation, migrations, and verification. Workspace APIs now require a verified session; health endpoints remain public.
 
@@ -95,7 +97,8 @@ Open <http://localhost:8000/docs>. For protected operations select **Authorize**
 | --- | --- | --- |
 | GET | `/health` | Process liveness: `{"status":"ok"}` |
 | GET | `/api/v1/health` | Versioned process liveness |
-| GET | `/api/v1/markets` | Two clearly labeled synthetic market-price fixtures |
+| GET | `/api/v1/markets` and `/api/v1/markets/{id}` | Read-only sourced market directory |
+| GET | `/api/v1/crops` and `/api/v1/crops/{id}` | Read-only multilingual crop catalog |
 | POST | `/api/v1/agent/demo` | Deterministic LangGraph demonstration; JSON body required |
 
 Example demo request (an empty object also uses these defaults):
@@ -163,17 +166,17 @@ shared across concurrent tasks. Endpoints contain no database queries.
 ```text
 app/
   main.py                  App factory, middleware, engine/session setup, engine cleanup
-  api/v1/endpoints/        Health, synthetic markets, and agent demo REST endpoints
+  api/v1/endpoints/        Health, user/profile, catalog, and agent demo REST endpoints
   core/                    Settings, error responses, JSON logging
   db/                      Declarative base, engine factory, session dependency
   models/                  Future ORM model imports for Alembic discovery; no business tables
   schemas/                 Typed API inputs and outputs
-  repositories/            Generic SQLAlchemy foundation and synthetic market repository
-  services/                Market service, profitability, recommendation, notification, HTTP client
+  repositories/            SQLAlchemy repositories and separate synthetic demo fixtures
+  services/                Catalog/profile services and separate demo services
   agents/                  Typed LangGraph state, demo graph, mock and OpenAI provider factory
   tools/                   Tool protocols and synthetic adapters
   utils/                   Reserved for shared helpers
-migrations/                Alembic environment, template, and empty initial baseline
+migrations/                Alembic environment, baseline, auth, profile, and catalog migrations
 tests/                    API, database, migration, graph, provider, and logging tests
 ```
 
@@ -182,7 +185,7 @@ tests/                    API, database, migration, graph, provider, and logging
 A session is created per dependency invocation and always closed. Exceptions roll back pending
 work; services explicitly own successful `commit()` calls. Engine SQL echo is disabled and
 parameter hiding is enabled. SQLite in-memory tests use a shared static pool. No application code
-calls `create_all()` and no market/business tables are created yet.
+calls `create_all()`. Apply the versioned migrations and run the catalog seed command to create and populate reference tables.
 
 ```bash
 uv run alembic upgrade head
@@ -196,7 +199,7 @@ uv run alembic upgrade head
 uv run alembic downgrade -1
 ```
 
-The initial baseline only creates Alembic's version-tracking table. Feature 01 adds provider-linked `users` and `revoked_sessions` through `a01_auth_users_sessions`. Both online and offline migrations load `DATABASE_URL` through the same settings and
+The initial baseline only creates Alembic's version-tracking table. Feature 01 adds provider-linked `users` and `revoked_sessions` through `a01_auth_users_sessions`. Feature 02 adds `farmer_profiles`; Feature 03 adds `crops` and `markets` through `a03_catalog`. Both online and offline migrations load `DATABASE_URL` through the same settings and
 metadata. Future migration generation sees models imported by `app.models`. Review generated
 migrations before applying them to any environment.
 

@@ -1,0 +1,200 @@
+{
+  "crops": [
+    {
+      "id": "tomato",
+      "name_en": "Tomato",
+      "name_si": "තක්කාලි",
+      "name_ta": "தக்காளி",
+      "category": "vegetable",
+      "default_unit": "kg",
+      "active": true,
+      "sources": [
+        {
+          "title": "Department of Agriculture — Tomato (English)",
+          "url": "https://doa.gov.lk/hordi-crop-tomato/",
+          "accessed_on": "2026-11-13",
+          "note": "Crop identity and local name. Category and kg default are application reference conventions."
+        },
+        {
+          "title": "Department of Agriculture — Tomato (Sinhala)",
+          "url": "https://doa.gov.lk/sinhala-hordi-crop-tomato/",
+          "accessed_on": "2026-11-13",
+          "note": "Crop identity and local name. Category and kg default are application reference conventions."
+        },
+        {
+          "title": "Department of Agriculture — Tomato (Tamil)",
+          "url": "https://doa.gov.lk/tamil-hordi-crop-tomato/",
+          "accessed_on": "2026-11-13",
+          "note": "Crop identity and local name. Category and kg default are application reference conventions."
+        }
+      ]
+    },
+    {
+      "id": "brinjal",
+      "name_en": "Brinjal",
+      "name_si": "වම්බටු",
+      "name_ta": "கத்தரி",
+      "category": "vegetable",
+      "default_unit": "kg",
+      "active": true,
+      "sources": [
+        {
+          "title": "Department of Agriculture — Brinjal (English)",
+          "url": "https://doa.gov.lk/hordi-crop-brinjal/",
+          "accessed_on": "2026-11-13",
+          "note": "Crop identity and local name. Category and kg default are application reference conventions."
+        },
+        {
+          "title": "Department of Agriculture — Brinjal (Sinhala)",
+          "url": "https://doa.gov.lk/sinhala-hordi-crop-brinjal/",
+          "accessed_on": "2026-11-13",
+          "note": "Crop identity and local name. Category and kg default are application reference conventions."
+        },
+        {
+          "title": "Department of Agriculture — Brinjal (Tamil)",
+          "url": "https://doa.gov.lk/tamil-hordi-crop-brinjal/",
+          "accessed_on": "2026-11-13",
+          "note": "Crop identity and local name. Category and kg default are application reference conventions."
+        }
+      ]
+    },
+    {
+      "id": "cabbage",
+      "name_en": "Cabbage",
+      "name_si": "ගෝවා",
+      "name_ta": "கோவா",
+      "category": "vegetable",
+      "default_unit": "kg",
+      "active": true,
+      "sources": [
+        {
+          "title": "Department of Agriculture — Cabbage (English)",
+          "url": "https://doa.gov.lk/hordi-crop-cabbage/",
+          "accessed_on": "2026-11-13",
+          "note": "Crop identity and local name. Category and kg default are application reference conventions."
+        },
+        {
+          "title": "Department of Agriculture — Cabbage (Sinhala)",
+          "url": "https://doa.gov.lk/sinhala-hordi-crop-cabbage/",
+          "accessed_on": "2026-11-13",
+          "note": "Crop identity and local name. Category and kg default are application reference conventions."
+        },
+        {
+          "title": "Department of Agriculture — Cabbage (Tamil)",
+          "url": "https://doa.gov.lk/tamil-hordi-crop-cabbage/",
+          "accessed_on": "2026-11-13",
+          "note": "Crop identity and local name. Category and kg default are application reference conventions."
+        }
+      ]
+    },
+    {
+      "id": "carrot",
+      "name_en": "Carrot",
+      "name_si": "කැරට්",
+      "name_ta": "கரட்",
+      "category": "root_vegetable",
+      "default_unit": "kg",
+      "active": true,
+      "sources": [
+        {
+          "title": "Department of Agriculture — Carrot (English)",
+          "url": "https://doa.gov.lk/hordi-crop-carrot/",
+          "accessed_on": "2026-11-13",
+          "note": "Crop identity and local name. Category and kg default are application reference conventions."
+        },
+        {
+          "title": "Department of Agriculture — Carrot (Sinhala)",
+          "url": "https://doa.gov.lk/sinhala-hordi-crop-carrot/",
+          "accessed_on": "2026-11-13",
+          "note": "Crop identity and local name. Category and kg default are application reference conventions."
+        },
+        {
+          "title": "Department of Agriculture — Carrot (Tamil)",
+          "url": "https://doa.gov.lk/tamil-hordi-crop-carrot/",
+          "accessed_on": "2026-11-13",
+          "note": "Crop identity and local name. Category and kg default are application reference conventions."
+        }
+      ]
+    }
+  ],
+  "markets": [
+    {
+      "id": "dambulla-dec",
+      "name": "Dambulla Dedicated Economic Centre",
+      "district": "Matale",
+      "location": "Dambulla, Matale District, Sri Lanka",
+      "market_type": "dedicated_economic_centre",
+      "active": true,
+      "latitude": null,
+      "longitude": null,
+      "coordinate_source": null,
+      "coordinates_verified_on": null,
+      "sources": [
+        {
+          "title": "JICA final report — Table A 3.18, T 3-31 (PDF page 62)",
+          "url": "https://openjicareport.jica.go.jp/pdf/12119558_03.pdf",
+          "accessed_on": "2026-11-13",
+          "note": "Economic centre names, districts and wholesale function; historical reference, not a live operations feed. Location is town-level, not a verified street address."
+        },
+        {
+          "title": "Ministry of Trade — Progress Report 2025, Table 3.15 (PDF pages 41–42)",
+          "url": "https://trade.gov.lk/storage/downloads/December2025/Z9fAUbyb1UdSIWD1LUWa.pdf",
+          "accessed_on": "2026-11-13",
+          "note": "Corroborates listed centres in 2025. Active means enabled in this catalog; opening hours and current trading conditions are not verified."
+        }
+      ]
+    },
+    {
+      "id": "meegoda-dec",
+      "name": "Meegoda Dedicated Economic Centre",
+      "district": "Colombo",
+      "location": "Meegoda, Colombo District, Sri Lanka",
+      "market_type": "dedicated_economic_centre",
+      "active": true,
+      "latitude": null,
+      "longitude": null,
+      "coordinate_source": null,
+      "coordinates_verified_on": null,
+      "sources": [
+        {
+          "title": "JICA final report — Table A 3.18, T 3-31 (PDF page 62)",
+          "url": "https://openjicareport.jica.go.jp/pdf/12119558_03.pdf",
+          "accessed_on": "2026-11-13",
+          "note": "Economic centre names, districts and wholesale function; historical reference, not a live operations feed. Location is town-level, not a verified street address."
+        },
+        {
+          "title": "Ministry of Trade — Progress Report 2025, Table 3.15 (PDF pages 41–42)",
+          "url": "https://trade.gov.lk/storage/downloads/December2025/Z9fAUbyb1UdSIWD1LUWa.pdf",
+          "accessed_on": "2026-11-13",
+          "note": "Corroborates listed centres in 2025. Active means enabled in this catalog; opening hours and current trading conditions are not verified."
+        }
+      ]
+    },
+    {
+      "id": "nuwara-eliya-dec",
+      "name": "Nuwara Eliya Dedicated Economic Centre",
+      "district": "Nuwara Eliya",
+      "location": "Nuwara Eliya, Nuwara Eliya District, Sri Lanka",
+      "market_type": "dedicated_economic_centre",
+      "active": true,
+      "latitude": null,
+      "longitude": null,
+      "coordinate_source": null,
+      "coordinates_verified_on": null,
+      "sources": [
+        {
+          "title": "JICA final report — Table A 3.18, T 3-31 (PDF page 62)",
+          "url": "https://openjicareport.jica.go.jp/pdf/12119558_03.pdf",
+          "accessed_on": "2026-11-13",
+          "note": "Economic centre names, districts and wholesale function; historical reference, not a live operations feed. Location is town-level, not a verified street address."
+        },
+        {
+          "title": "Ministry of Trade — Progress Report 2025, Table 3.15 (PDF pages 41–42)",
+          "url": "https://trade.gov.lk/storage/downloads/December2025/Z9fAUbyb1UdSIWD1LUWa.pdf",
+          "accessed_on": "2026-11-13",
+          "note": "Corroborates listed centres in 2025. Active means enabled in this catalog; opening hours and current trading conditions are not verified."
+        }
+      ]
+    }
+  ]
+}
