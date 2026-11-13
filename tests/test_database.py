@@ -68,7 +68,7 @@ def test_migrations_upgrade_downgrade_and_check(tmp_path, monkeypatch):
     command.upgrade(config, "head")
     command.check(config)
     engine = build_engine(Settings(_env_file=None, database_url=url))
-    assert inspect(engine).get_table_names() == ["alembic_version"]
+    assert inspect(engine).get_table_names() == ["alembic_version", "revoked_sessions", "users"]
     with engine.connect() as connection:
         assert connection.scalar(text("SELECT count(*) FROM alembic_version")) == 1
     command.downgrade(config, "base")

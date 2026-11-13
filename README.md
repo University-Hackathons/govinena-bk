@@ -3,6 +3,8 @@
 Python 3.12 FastAPI foundation for the GoviNena farmer market decision support system.
 The current APIs demonstrate synthetic data and deterministic reasoning, not live market advice.
 
+See [AUTHENTICATION.md](AUTHENTICATION.md) for Supabase configuration, session revocation, migrations, and verification. Workspace APIs now require a verified session; health endpoints remain public.
+
 ## Setup and run
 
 Install [uv](https://docs.astral.sh/uv/getting-started/installation/), then:
@@ -85,7 +87,7 @@ is future work; no paid calls are made by the current APIs.
 
 ## APIs and Swagger
 
-Open <http://localhost:8000/docs>. Expand an operation, select **Try it out**, then **Execute**.
+Open <http://localhost:8000/docs>. For protected operations select **Authorize** and enter a disposable Supabase access token, then use **Try it out**.
 
 | Method | Route | Behavior |
 | --- | --- | --- |
@@ -107,9 +109,10 @@ Example demo request (an empty object also uses these defaults):
 ```
 
 ```bash
-curl http://localhost:8000/api/v1/markets
+curl http://localhost:8000/api/v1/markets -H "Authorization: Bearer ${ACCESS_TOKEN}"
 curl -X POST http://localhost:8000/api/v1/agent/demo \
   -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer ${ACCESS_TOKEN}" \
   -d '{"quantity_kg":"100","re_evaluate_once":true}'
 ```
 
@@ -191,8 +194,7 @@ uv run alembic upgrade head
 uv run alembic downgrade -1
 ```
 
-The initial baseline has no business schema changes; only Alembic's version-tracking table is
-created. Both online and offline migrations load `DATABASE_URL` through the same settings and
+The initial baseline only creates Alembic's version-tracking table. Feature 01 adds provider-linked `users` and `revoked_sessions` through `a01_auth_users_sessions`. Both online and offline migrations load `DATABASE_URL` through the same settings and
 metadata. Future migration generation sees models imported by `app.models`. Review generated
 migrations before applying them to any environment.
 
