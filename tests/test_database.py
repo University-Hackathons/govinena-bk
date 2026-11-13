@@ -73,6 +73,7 @@ def test_migrations_upgrade_downgrade_and_check(tmp_path, monkeypatch):
         "crops",
         "farmer_profiles",
         "markets",
+        "produce_batches",
         "revoked_sessions",
         "users",
     ]
