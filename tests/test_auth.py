@@ -85,6 +85,8 @@ def headers(token=None):
     "path,method",
     [
         ("/api/v1/users/me", "get"),
+        ("/api/v1/farmer/profile", "get"),
+        ("/api/v1/farmer/profile", "put"),
         ("/api/v1/markets", "get"),
         ("/api/v1/agent/demo", "post"),
         ("/api/v1/auth/logout", "post"),
@@ -196,3 +198,22 @@ def test_logout_revokes_only_current_session_and_survives_refresh(auth_client):
 def test_missing_configuration_fails_closed(client):
     response = client.get("/api/v1/users/me", headers=headers())
     assert response.status_code == 503
+
+
+def test_farmer_profile_provider_outage_fails_closed(auth_client):
+    client, provider = auth_client
+    provider["unavailable"] = True
+    assert client.get("/api/v1/farmer/profile", headers=headers()).status_code == 503
+    response = client.put(
+        "/api/v1/farmer/profile",
+        headers=headers(),
+        json={
+            "full_name": "Test Farmer",
+            "district": "Kandy",
+            "town": "Gampola",
+            "preferred_language": "en",
+            "transport_mode": "other",
+        },
+    )
+    assert response.status_code == 503
+    assert "private" not in response.text

@@ -1,5 +1,7 @@
 # GoviNena backend
 
+Feature 02 adds farmer profiles and preferences. See [FARMER_PROFILE.md](FARMER_PROFILE.md) for API contracts, migration steps, file changes, verification, and current environment limitations.
+
 Python 3.12 FastAPI foundation for the GoviNena farmer market decision support system.
 The current APIs demonstrate synthetic data and deterministic reasoning, not live market advice.
 
