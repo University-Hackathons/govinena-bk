@@ -21,7 +21,21 @@ class JsonFormatter(logging.Formatter):
             "logger": record.name,
             "message": record.getMessage(),
         }
-        for key in ("request_id", "method", "route", "status_code", "duration_ms", "error_type"):
+        for key in (
+            "request_id",
+            "method",
+            "route",
+            "status_code",
+            "duration_ms",
+            "error_type",
+            "import_id",
+            "row_number",
+            "error_code",
+            "accepted",
+            "duplicates",
+            "rejected",
+            "requested_by",
+        ):
             if hasattr(record, key):
                 payload[key] = getattr(record, key)
         # Do not serialize exception messages, tracebacks, arbitrary extras, or settings.
