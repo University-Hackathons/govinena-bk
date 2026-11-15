@@ -118,3 +118,13 @@ def current_user(identity: IdentityDependency, session: SessionDependency) -> Us
 
 
 UserDependency = Annotated[User, Depends(current_user)]
+
+
+def admin_user(request: Request, user: UserDependency) -> User:
+    # Operator-managed provider IDs; never trust user-editable metadata or email.
+    if user.id not in request.app.state.settings.admin_user_ids:
+        raise HTTPException(403)
+    return user
+
+
+AdminDependency = Annotated[User, Depends(admin_user)]

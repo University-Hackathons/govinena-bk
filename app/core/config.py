@@ -3,6 +3,7 @@
 from functools import lru_cache
 from pathlib import Path
 from typing import Literal
+from uuid import UUID
 
 from pydantic import Field, HttpUrl, SecretStr, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -39,6 +40,8 @@ class Settings(BaseSettings):
     supabase_url: HttpUrl | None = None
     supabase_publishable_key: SecretStr | None = Field(default=None, repr=False)
     supabase_audience: str = "authenticated"
+    admin_user_ids: list[UUID] = Field(default_factory=list)
+    price_stale_after_hours: int = Field(default=72, ge=1, le=720)
 
     @field_validator("supabase_url", "supabase_publishable_key", mode="before")
     @classmethod

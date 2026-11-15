@@ -1,5 +1,7 @@
 # GoviNena backend
 
+Feature 05 adds audited agricultural price observations, verified CSV import, admin authorization and freshness/history APIs. See [MARKET_PRICES.md](MARKET_PRICES.md) for setup, CSV contract, provenance, files changed and actual validation.
+
 Feature 03 adds the read-only crop and wholesale market catalog. See [CATALOG.md](CATALOG.md) for setup, source provenance, API contracts, and validation.
 
 Feature 02 adds farmer profiles and preferences. See [FARMER_PROFILE.md](FARMER_PROFILE.md) for API contracts, migration steps, file changes, verification, and current environment limitations.
