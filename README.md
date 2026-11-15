@@ -1,5 +1,7 @@
 # GoviNena backend
 
+Feature 06 adds owned-batch route and transportation cost estimates with manual/quote fallback and recorded assumptions. See [LOGISTICS.md](LOGISTICS.md) for configuration, API, storage policy, file changes and verification.
+
 Feature 05 adds audited agricultural price observations, verified CSV import, admin authorization and freshness/history APIs. See [MARKET_PRICES.md](MARKET_PRICES.md) for setup, CSV contract, provenance, files changed and actual validation.
 
 Feature 03 adds the read-only crop and wholesale market catalog. See [CATALOG.md](CATALOG.md) for setup, source provenance, API contracts, and validation.

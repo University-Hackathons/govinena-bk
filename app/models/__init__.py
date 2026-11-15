@@ -1,11 +1,13 @@
 from app.db.base import Base
 from app.models.catalog import Crop, Market
 from app.models.farmer import FarmerProfile
+from app.models.logistics import LogisticsEstimate
 from app.models.prices import MarketPriceObservation, PriceImport, PriceImportRow
 from app.models.produce import ProduceBatch
 from app.models.user import RevokedSession, User
 
 __all__ = [
+    "LogisticsEstimate",
     "MarketPriceObservation",
     "PriceImport",
     "PriceImportRow",

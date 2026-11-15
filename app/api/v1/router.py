@@ -4,6 +4,7 @@ from app.api.v1.endpoints.agent import router as agent_router
 from app.api.v1.endpoints.crops import router as crops_router
 from app.api.v1.endpoints.farmer import router as farmer_router
 from app.api.v1.endpoints.health import router as health_router
+from app.api.v1.endpoints.logistics import router as logistics_router
 from app.api.v1.endpoints.markets import router as markets_router
 from app.api.v1.endpoints.prices import router as prices_router
 from app.api.v1.endpoints.produce import router as produce_router
@@ -17,5 +18,6 @@ router.include_router(farmer_router)
 router.include_router(crops_router)
 router.include_router(produce_router)
 router.include_router(prices_router)
+router.include_router(logistics_router)
 router.include_router(markets_router, dependencies=[Depends(active_identity)])
 router.include_router(agent_router, dependencies=[Depends(active_identity)])

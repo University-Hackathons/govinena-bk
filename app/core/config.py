@@ -41,9 +41,20 @@ class Settings(BaseSettings):
     supabase_publishable_key: SecretStr | None = Field(default=None, repr=False)
     supabase_audience: str = "authenticated"
     admin_user_ids: list[UUID] = Field(default_factory=list)
+    map_provider: Literal["manual", "mapbox"] = Field(
+        default="manual", validation_alias="MAP_PROVIDER"
+    )
+    mapbox_access_token: SecretStr | None = Field(
+        default=None, validation_alias="MAPBOX_ACCESS_TOKEN", repr=False
+    )
+    routing_allow_mapbox_cache: bool = False
+    route_cache_ttl_seconds: int = Field(default=300, ge=0, le=3600)
+
     price_stale_after_hours: int = Field(default=72, ge=1, le=720)
 
-    @field_validator("supabase_url", "supabase_publishable_key", mode="before")
+    @field_validator(
+        "supabase_url", "supabase_publishable_key", "mapbox_access_token", mode="before"
+    )
     @classmethod
     def empty_auth_setting(cls, value):
         return None if isinstance(value, str) and not value.strip() else value
