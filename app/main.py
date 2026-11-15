@@ -9,6 +9,7 @@ from app.core.config import Settings, get_settings
 from app.core.errors import register_exception_handlers
 from app.core.logging import RequestLoggingMiddleware, configure_logging
 from app.db.session import build_engine, build_session_factory
+from app.providers.routes import RouteCache
 from app.schemas.errors import ErrorResponse
 
 
@@ -38,6 +39,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         },
     )
     application.state.settings = settings
+    application.state.route_cache = RouteCache()
     application.state.engine = build_engine(settings)
     application.state.session_factory = build_session_factory(application.state.engine)
     register_exception_handlers(application)

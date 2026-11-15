@@ -72,6 +72,7 @@ def test_migrations_upgrade_downgrade_and_check(tmp_path, monkeypatch):
         "alembic_version",
         "crops",
         "farmer_profiles",
+        "logistics_estimates",
         "market_price_import_rows",
         "market_price_imports",
         "market_price_observations",
