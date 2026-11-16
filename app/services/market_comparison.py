@@ -108,15 +108,22 @@ class MarketComparisonService:
         )
 
     async def compare(
-        self, farmer_id: UUID, data: ComparisonInput, *, assessed_at: datetime | None = None
+        self,
+        farmer_id: UUID,
+        data: ComparisonInput,
+        *,
+        assessed_at: datetime | None = None,
+        persist: bool = True,
     ):
         try:
-            return await self._compare(farmer_id, data, utc(assessed_at or datetime.now(UTC)))
+            return await self._compare(
+                farmer_id, data, utc(assessed_at or datetime.now(UTC)), persist
+            )
         except SQLAlchemyError:
             self.session.rollback()
             raise HTTPException(503) from None
 
-    async def _compare(self, farmer_id, data, now):
+    async def _compare(self, farmer_id, data, now, persist=True):
         batch = ProduceRepository(self.session).get(farmer_id, data.produce_batch_id)
         if batch is None:
             raise HTTPException(404)
@@ -351,7 +358,7 @@ class MarketComparisonService:
         for rank, option in enumerate(eligible, 1):
             option.rank = rank
         excluded.sort(key=lambda item: item.market_id)
-        snapshot_id = None if used_mapbox else uuid4()
+        snapshot_id = None if used_mapbox or not persist else uuid4()
         result = ComparisonResponse(
             snapshot_id=snapshot_id,
             produce_batch_id=batch.id,
@@ -377,6 +384,8 @@ class MarketComparisonService:
                 "Comparison not retained because it includes Mapbox route output or derived values."
             )
             if used_mapbox
+            else "Comparison evaluated without a separate snapshot."
+            if not persist
             else (
                 "Private comparison snapshot saved; it is a historical scenario, not "
                 "a current offer."

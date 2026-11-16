@@ -14,7 +14,9 @@ class MockReasoner:
         return ["market_prices", "route_estimation", "transport_cost"]
 
 
-def create_reasoner(settings: Settings) -> MockReasoner | ChatOpenAI:
+def create_reasoner(
+    settings: Settings, *, max_retries: int = 2, timeout: float = 30
+) -> MockReasoner | ChatOpenAI:
     if settings.reasoning_mode == "mock":
         return MockReasoner()
     if not settings.openai_api_key or not settings.openai_api_key.get_secret_value().strip():
@@ -24,6 +26,6 @@ def create_reasoner(settings: Settings) -> MockReasoner | ChatOpenAI:
     return ChatOpenAI(
         api_key=settings.openai_api_key,
         model=settings.openai_model,
-        timeout=30,
-        max_retries=2,
+        timeout=timeout,
+        max_retries=max_retries,
     )

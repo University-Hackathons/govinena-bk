@@ -50,6 +50,10 @@ class Settings(BaseSettings):
     routing_allow_mapbox_cache: bool = False
     route_cache_ttl_seconds: int = Field(default=300, ge=0, le=3600)
 
+    agent_max_steps: int = Field(default=40, ge=12, le=60)
+    agent_max_attempts: int = Field(default=2, ge=1, le=3)
+    agent_timeout_seconds: int = Field(default=180, ge=30, le=300)
+
     price_stale_after_hours: int = Field(default=72, ge=1, le=720)
 
     @field_validator(
