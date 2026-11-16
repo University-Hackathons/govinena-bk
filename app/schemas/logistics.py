@@ -23,10 +23,8 @@ class Tariff(BaseModel):
     market_handling_lkr: Money = Decimal(0)
 
 
-class LogisticsInput(BaseModel):
+class TransportOptions(BaseModel):
     model_config = ConfigDict(extra="forbid", str_strip_whitespace=True, allow_inf_nan=False)
-    produce_batch_id: UUID
-    market_id: CatalogID
     route_mode: Literal["automatic", "manual"] = "automatic"
     pricing_basis: Literal["one_way", "round_trip"] = "one_way"
     transport_mode: Literal["own_vehicle", "hired_vehicle", "other"] | None = None
@@ -69,6 +67,11 @@ class LogisticsInput(BaseModel):
         if self.manual_return_distance_km is not None and self.assume_equal_return:
             raise ValueError("Choose an explicit return distance or the equal-return assumption")
         return self
+
+
+class LogisticsInput(TransportOptions):
+    produce_batch_id: UUID
+    market_id: CatalogID
 
 
 class RouteResult(BaseModel):
