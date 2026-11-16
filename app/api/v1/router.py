@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends
 
 from app.api.v1.endpoints.agent import router as agent_router
+from app.api.v1.endpoints.comparisons import router as comparisons_router
 from app.api.v1.endpoints.crop_risk import router as crop_risk_router
 from app.api.v1.endpoints.crops import router as crops_router
 from app.api.v1.endpoints.farmer import router as farmer_router
@@ -21,5 +22,6 @@ router.include_router(produce_router)
 router.include_router(prices_router)
 router.include_router(logistics_router)
 router.include_router(crop_risk_router)
+router.include_router(comparisons_router)
 router.include_router(markets_router, dependencies=[Depends(active_identity)])
 router.include_router(agent_router, dependencies=[Depends(active_identity)])

@@ -110,7 +110,7 @@ class LogisticsService:
         except RouteUnavailable as exc:
             return self._manual(data, exc.reason)
 
-    async def estimate(self, farmer_id: UUID, data: LogisticsInput):
+    async def estimate(self, farmer_id: UUID, data: LogisticsInput, *, persist: bool = True):
         try:
             batch = self.repo.batch(farmer_id, data.produce_batch_id)
             if batch is None:
@@ -218,7 +218,7 @@ class LogisticsService:
                 "quote_scope": "whole_batch_all_trips",
             }
             record_id = None
-            if effective is not None:
+            if effective is not None and persist:
                 # Keep user inputs, but no Mapbox route output or derived cost in durable history.
                 recorded = None
                 if route.source != "mapbox":
