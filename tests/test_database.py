@@ -69,6 +69,7 @@ def test_migrations_upgrade_downgrade_and_check(tmp_path, monkeypatch):
     command.check(config)
     engine = build_engine(Settings(_env_file=None, database_url=url))
     assert inspect(engine).get_table_names() == [
+        "agent_runs",
         "alembic_version",
         "comparison_snapshots",
         "crop_risk_profiles",
